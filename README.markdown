@@ -171,64 +171,97 @@ Autre exemple: Donner tous les droits aux membres du groupe admin :
 
 
 
+__________________________________________________________________________________________________________________
+
+
 # Variable disponible dans le module 'phobos-sudo'
 
+___________________________________________________________________________________________
 
-### Installation du package 'sudo'i
-	$package_name		='sudo'   	# Le nom du paquet	$package_ensure   ='present'  # Etat du paquet: n° version, present (also called installed), absent, purged, held, latest. 
+### Installation du package 'sudo'
+
+	$package_manage	= true			# Faut-il installer le module phobos-sudo: true, falsei	$package_name		= 'sudo'   	# Le nom du paquett	$package_ensure   = 'present'  	# Etat du paquet: n° version, present (also called installed), absent, purged, held, latest. 
 
 	          
-### Configuration des fichiers 'sudo'
+### Configuration des fichiers '/etc/sudoers'
 
-	$file_name          = 'sudoers'       # 
-	$file_path          = '/etc/sudoers'  # Si omis, la valeur par défaut correspondra au titre 	(file_name).     
-	$file_ensure        = 'present'       # Spécifier le type gérer:  fichiers, répertoires ou  liens symboliques. Valeur possible: present, absent, file, directory, and link.    
-	$file_backup        = '.puppet-bak'   # le contenu du fichier doit être sauvegardé avant d'être remplacé.   
-	$file_content       = ''              # Le contenu souhaité d'un fichier, comme une chaîne. This attribute is mutually exclusive with source and target. template($config_template),  
-	$file_mode          = '0644'          # Autorisations désiré dans la notation symbolique (r,w,x,t,s,X,u,g,o)  ou numclass{'sudo::service': } ->         érique.
-	$file_owner         = 'root'          # L'utilisateur auquel le dossier devrait appartenir ( nom d'utilisateur ou ID )
+	$file_name        = '/etc/sudoers'  #  Nom du fichier de configuration
+	$file_ensure      = 'present'   	# Assurez-vous de la présence du fichier     
+	$file_backup      = '.puppet-bak'   # sauvegarde du fichier avant d'être remplacé.   
+	$file_content     = 'sudoers.erb'  	# chemin du template à utiliser
+	$file_group       = 'root'    		# Quel groupe devrait posséder le fichier.  
+	$file_mode        = '0440'    		# Autorisations désiré : notation symbolique (r,w,x,t,s,X,u,g,o)  ou numérique
+	$file_owner       = 'root'    		# L'utilisateur auquel le dossier devrait appartenir ( nom d'utilisateur ou ID )
+	$file_replace     = 'true'   		# Remplacer le fichier qui existe deja sur le système local. (true, false, yes, no). 
+		 
+
+### Configuration des fichiers '/etc/sudoers'
+    
+    $dir_name        = '/etc/sudoers.d' #  Nom du répertoire de configuration personnel
+	$dir_ensure       = 'directory'     
+	$dir_group        = 'root'  
+	$dir_mode         = '0550'      
+	$dir_owner        = 'root'   
 		 
 
 
+## Host ALiases::
+	$SRV-DEV = [...,...]				#tableau pouvant contenir les serveurs de développement
+	$SRV-TST = [...,...]				#tableau pouvant contenir les serveurs de test
+	$SRV-REC = [...,...]				#tableau pouvant contenir les serveurs de recette
+	$SRV-PRD = [...,...]				#tableau pouvant contenir les serveurs de production
+s
+
+## User Aliases: (LDAP, NIS, etc...))
+	ADMINS = [...,...]s	DEVEL  = [...,...]2	DBA	  = [...,...]
 
 
 
-## Groups of machines:
-Host_Alias     FILESERVERS = phobos
 
-##regular groups: (ie, from files, LDAP, NIS, etc)
-Host_Alias     FILESERVERS = phobos
-Host_Alias     MAILSERVERS = smtp, smtp2
+## Cmnd_Alias: (Network, Software, Service...)
 
 
+### Networking
 
-## Networking
-Cmnd_Alias NETWORKING = /sbin/route, /sbin/ifconfig, /bin/ping, /sbin/dhclient, /usr/bin/net, /sbin/iptables, /usr/bin/rfcomm, /usr/bin/wvdial, /sbin/iwconfig, /sbin/mii-tool
-
-## Installation and management of software
-Cmnd_Alias SOFTWARE = /bin/rpm, /usr/bin/up2date, /usr/bin/yum
-
-## Services
-Cmnd_Alias SERVICES = /sbin/service, /sbin/chkconfig
-
-## Updating the locate database
-Cmnd_Alias LOCATE = /usr/bin/updatedb
-
-## Storage
-Cmnd_Alias STORAGE = /sbin/fdisk, /sbin/sfdisk, /sbin/parted, /sbin/partprobe, /bin/mount, /bin/umount
-
-## Delegating permissions
-Cmnd_Alias DELEGATING = /usr/sbin/visudo, /bin/chown, /bin/chmod, /bin/chgrp
-
-## Processes
-Cmnd_Alias PROCESSES = /bin/nice, /bin/kill, /usr/bin/kill, /usr/bin/killall, /usr/sbin/passwd [A-z]*, ! /usr/bin/passwd root
-
-## Drivers
-Cmnd_Alias DRIVERS = /sbin/modprobe
+	Cmnd_Alias NETWORKING = /sbin/route, /sbin/ifconfig, /bin/ping, /sbin/dhclient, /usr/bin/net, /sbin/iptables, /usr/bin/rfcomm, /usr/bin/wvdial, /sbin/iwconfig, /sbin/mii-tool
 
 
+### Installation and management of software
 
-Defaults    requiretty
+	Cmnd_Alias SOFTWARE = /bin/rpm, /usr/bin/up2date, /usr/bin/yum
+
+
+### Services
+
+	Cmnd_Alias SERVICES = /sbin/service, /sbin/chkconfig
+
+
+### Updating the locate database
+
+	Cmnd_Alias LOCATE = /usr/bin/updatedb
+
+
+### Storagee
+
+	Cmnd_Alias STORAGE = /sbin/fdisk, /sbin/sfdisk, /sbin/parted, /sbin/partprobe, /bin/mount, /bin/umount
+
+
+### Delegating permissions
+
+	Cmnd_Alias DELEGATING = /usr/sbin/visudo, /bin/chown, /bin/chmod, /bin/chgrp
+
+
+### Processes
+
+	Cmnd_Alias PROCESSES = /bin/nice, /bin/kill, /usr/bin/kill, /usr/bin/killall, /usr/sbin/passwd [A-z]*, ! /usr/bin/passwd root
+
+
+### Drivers
+	Cmnd_Alias DRIVERS = /sbin/modprob
+	
+	e
+
+
 
 
 

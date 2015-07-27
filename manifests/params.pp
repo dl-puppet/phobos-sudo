@@ -20,7 +20,7 @@ class sudo::params
 		  $file_ensure                      = 'present'       # Spécifier le type gérer:  fichiers, répertoires ou liens symboliques. Valeur possible: present, absent, file, directory, and link.    
 		  $file_backup                      = '.puppet-bak'   # le contenu du fichier doit être sauvegardé avant d'être remplacé.   
 		  #$file_checksum                   = 'md5'           # type de contrôle à utiliser pour déterminer si vous voulez remplacer le contenu d'un fichier: md5, md5lite, sha256, sha256lite, mtime, ctime, none. 
-		  $file_content                     = ''              # Le contenu souhaité d'un fichier, comme une chaîne. This attribute is mutually exclusive with source and target. template($config_template),  
+		  $file_content                     = 'sudoers.erb'   # Le contenu souhaité d'un fichier, comme une chaîne. This attribute is mutually exclusive with source and target. template($config_template),  
 		  #$file_ctime                      = ''              # Une seule lire l'état pour vérifier le fichier ctime. tel est le moment de la modification la plus récente à la propriétaire, le groupe, les permissions, ou le contenu du fichier.
 		  #$file_force                      = 'true'          # Forcer la création, suppression,etc.... :  true, false, yes, no. 
 		  $file_group                       = 'root'          # Quel groupe devrait posséder le fichier.
