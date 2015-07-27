@@ -1,6 +1,6 @@
 # installation du logiciel
 
-class template_project::install inherits template_project
+class sudo::install inherits sudo
 {
         package { '$package_name':      
 				ensure                => $package_ensure, 

@@ -1,6 +1,6 @@
 # Gestion des services/daemon du logiciel
 
-class template_project::service inherits template_project
+class sudo::service inherits sudo
 {
  
     if ! ($service_ensure in [ 'running', 'stopped' ]) {

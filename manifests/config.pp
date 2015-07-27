@@ -1,6 +1,6 @@
 # Configuration du logiciel
 
-class template_project::config inherits template_project
+class sudo::config inherits sudo
 {
   
   file { '$file_name':
@@ -34,7 +34,7 @@ class template_project::config inherits template_project
 			  target                => $file_target,
 			  #validate_cmd          => $file_validate_cmd,
 			  #validate_replacement  => $file_validate_replacement,
-			  require => Class['template_project::install'],
+			  require => Class['sudo::install'],
 			  }
 
 
