@@ -16,6 +16,7 @@ La politique 'SUDO' de l'utilisateur est entraîné par le fichier '/etc/sudoers
 
 
 # Syntaxe
+
 ## Qui  hôte = (identité) commande [... , ...]
 
     exemple :   
@@ -28,13 +29,6 @@ La politique 'SUDO' de l'utilisateur est entraîné par le fichier '/etc/sudoers
 # Trouver de aide
 
 man sudo (8), man sudoers(5), man visudo(8)		
-
-
-
-
-# Mailto
-
-Si un utilisateur ne figure pas dans la politique 'SUDO' et tente d'exécuter une commande avec sudo, un courrier est envoyé aux autorités compétentes. Cette fonctionnalité est configuré via l'entrée par défaut 'mailto' qui est généralement 'root' par défaut.	Toutefois, notez que le courrier ne sera pas envoyé si l'utilisateur non autorisé tente d'exécuter 'sudo' avec l'option '-l' ou '-v'. Cela permet aux utilisateurs de déterminer eux-mêmes si ils sont ou non autorisés à utiliser sudo.	
 
 
 
@@ -74,6 +68,12 @@ Configurer le comportement par defaut de sudo
 
     	defaults env_reset,timestamp_timeout=0,pwfeedback,badpass_message="Mauvais Password",
 
+
+### Mailto
+
+Si un utilisateur ne figure pas dans la politique 'SUDO' et tente d'exécuter une commande avec sudo, un courrier est envoyé aux autorités compétentes. Cette fonctionnalité est configuré via l'entrée par défaut 'mailto' qui est généralement 'root' par défaut.	Toutefois, notez que le courrier ne sera pas envoyé si l'utilisateur non autorisé tente d'exécuter 'sudo' avec l'option '-l' ou '-v'. Cela permet aux utilisateurs de déterminer eux-mêmes si ils sont ou non autorisés à utiliser sudo.	
+
+	defaults mailto=dlevray@gmail.com
 
 
 ### ENV_RESET
@@ -122,7 +122,10 @@ mail_badpass
 secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin/bin"
 always_set_home
 !insults
-
+log_out
+defaults!/sbin/reboot !log_output
+default	!visiblepw
+ 
 
 ### Insults
 
@@ -172,27 +175,18 @@ Autre exemple: Donner tous les droits aux membres du groupe admin :
 
 
 ### Installation du package 'sudo'i
-$package_name		='sudo'   	# Le nom du paquet$package_ensure     ='present'  # Etat du paquet: n° version, present (also called installed), absent, purged, held, latest. 
-
-### Installation du service 'sudo'
-
-$service_manage     = 'true'          # Active le service
-$service_name       = 'ntpd'          # Le nom du service
-$service_ensure     = 'running'       # Etat du service: stopped (also called false), running (also called true).           
-$service_enable     = 'true'          # Si un service doit être activé au démarrage système:  true, false, manual, mask.
-$service_hasrestart = 'true'          # Spécifier que le script d'initialisation du service dispose d'une commande 'restart': true, false .  
-$service_hasstatus  = 'true'          # Déclarer si le script d'initialisation du service dispose d'une commande 'status': true, false
+	$package_name		='sudo'   	# Le nom du paquet	$package_ensure   ='present'  # Etat du paquet: n° version, present (also called installed), absent, purged, held, latest. 
 
 	          
 ### Configuration des fichiers 'sudo'
 
-$file_name          = 'sudoers'       # 
-$file_path          = '/etc/sudoers'  # Si omis, la valeur par défaut correspondra au titre (file_name).     
-$file_ensure        = 'present'       # Spécifier le type gérer:  fichiers, répertoires ou liens symboliques. Valeur possible: present, absent, file, directory, and link.    
-$file_backup        = '.puppet-bak'   # le contenu du fichier doit être sauvegardé avant d'être remplacé.   
-$file_content       = ''              # Le contenu souhaité d'un fichier, comme une chaîne. This attribute is mutually exclusive with source and target. template($config_template),  
-$file_mode          = '0644'          # Autorisations désiré dans la notation symbolique (r,w,x,t,s,X,u,g,o)  ou numérique.
-$file_owner         = 'root'          # L'utilisateur auquel le dossier devrait appartenir ( nom d'utilisateur ou ID )
+	$file_name          = 'sudoers'       # 
+	$file_path          = '/etc/sudoers'  # Si omis, la valeur par défaut correspondra au titre 	(file_name).     
+	$file_ensure        = 'present'       # Spécifier le type gérer:  fichiers, répertoires ou  liens symboliques. Valeur possible: present, absent, file, directory, and link.    
+	$file_backup        = '.puppet-bak'   # le contenu du fichier doit être sauvegardé avant d'être remplacé.   
+	$file_content       = ''              # Le contenu souhaité d'un fichier, comme une chaîne. This attribute is mutually exclusive with source and target. template($config_template),  
+	$file_mode          = '0644'          # Autorisations désiré dans la notation symbolique (r,w,x,t,s,X,u,g,o)  ou numclass{'sudo::service': } ->         érique.
+	$file_owner         = 'root'          # L'utilisateur auquel le dossier devrait appartenir ( nom d'utilisateur ou ID )
 		 
 
 

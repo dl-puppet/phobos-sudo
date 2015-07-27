@@ -2,7 +2,9 @@
 
 class sudo::install inherits sudo
 {
-        package { '$package_name':      
+   if $package_manage == true { 
+     
+        package { $package_name:      
 				ensure                => $package_ensure, 
 				name                  => $package_name,         
 				#install_options      => $package_install_options,
@@ -12,5 +14,8 @@ class sudo::install inherits sudo
 				#source               => $package_source,
 				#uninstall_options    => $package_uninstall_options,
 				}
-        
+				
+	 }
+	 default: { fail('Option Package_manage dont enable') }
+	 
 }
