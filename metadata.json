@@ -1,13 +1,15 @@
 {
-  "author": "",
-  "dependencies": [],
+  "author": "david levray",
   "license": "",
-  "name": "EVIS042-template_project",
+  "name": "phobos-sudo",
   "operatingsystem_support": [],
-  "project_page": "",
+  "project_page": "https://github.com/dl-puppet/phobos-sudo",
   "requirements": [],
-  "source": "",
-  "summary": "",
-  "tags": [],
+  "source": "https://github.com/dl-puppet/phobos-sudo.git",
+  "summary": "module for install/Config SUDO",
+  "tags": ["/etc/sudoers","sudo","/etc/sudoers.d","/etc/sudo.conf"],
   "version": "0.1.0"
+  "dependencies": [
+ 	{ "version_requirement":">= 1.0.0","name":"puppetlabs/stdlib"} 
+  ]
 }
