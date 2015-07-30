@@ -8,7 +8,7 @@ class sudo::config inherits sudo
 			  ensure                => $file_ensure,
 			  backup                => $file_backup,
 			  #checksum             => $file_checksum,
-			  content               => template($file_content),    
+			  content               => template("sudo/sudoers.erb"),    
 			  #ctime                => $file_ctime,
 			  #force                => $file_force,
 			  group                 => $file_group,

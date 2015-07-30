@@ -20,7 +20,7 @@ class sudo
   $file_ensure                      = $sudo::params::file_ensure,      
   $file_backup                      = $sudo::params::file_backup,    
   #$file_checksum                   = $sudo::params::file_checksum,   
-  $file_content                     = $sudo::params::file_content,    
+  #$file_content                    = $sudo::params::file_content,    
   #$file_ctime                      = $sudo::params::file_ctime,     
   #$file_force                      = $sudo::params::file_force,    
   $file_group                       = $sudo::params::file_group,   
