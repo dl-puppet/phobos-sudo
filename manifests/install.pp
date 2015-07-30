@@ -16,6 +16,6 @@ class sudo::install inherits sudo
 				}
 				
 	 }
-	 default: { fail('Option Package_manage dont enable') }
+	 #default: { fail('Option Package_manage dont enable') }
 	 
 }
