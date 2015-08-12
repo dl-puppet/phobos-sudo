@@ -1,0 +1,78 @@
+####################################################################################
+############################		Host Aliases		############################
+####################################################################################
+# Host_Alias     FILESERVERS = phobos 
+# Host_Alias     MAILSERVERS = smtp, smtp2
+
+####################################################################################
+############################		User Aliases		############################
+####################################################################################
+#User_Alias 	ADMINS = phobos
+
+####################################################################################
+############################		Command Aliases		############################
+####################################################################################
+Cmnd_Alias 	NETWORKING 	= /sbin/route, /sbin/ifconfig, /bin/ping, /sbin/dhclient, /usr/bin/net, /sbin/iptables, /usr/bin/rfcomm, /usr/bin/wvdial, /sbin/iwconfig, /sbin/mii-tool
+Cmnd_Alias 	SOFTWARE 	= /bin/rpm, /usr/bin/up2date, /usr/bin/yum
+Cmnd_Alias 	SERVICES 	= /sbin/service, /sbin/chkconfig
+Cmnd_Alias 	LOCATE	 	= /usr/bin/updatedb
+Cmnd_Alias 	STORAGE 	= /sbin/fdisk, /sbin/sfdisk, /sbin/parted, /sbin/partprobe, /bin/mount, /bin/umount
+Cmnd_Alias 	DELEGATING 	= /usr/sbin/visudo, /bin/chown, /bin/chmod, /bin/chgrp 
+Cmnd_Alias 	PROCESSES 	= /bin/nice, /bin/kill, /usr/bin/kill, /usr/bin/killall, /usr/sbin/passwd [A-z]*
+#, !/usr/bin/passwd root
+Cmnd_Alias 	DRIVERS 	= /sbin/modprobe
+
+
+####################################################################################
+#############################			Rules Users		    ########################
+####################################################################################
+## user MACHINE=COMMANDS
+root            ALL=(ALL)ALL
+phobos          ALL=(root)NOPASSWD:NETWORKING,SOFTWARE,SERVICES,LOCATE,STORAGE,DELEGATING,PROCESSES,DRIVERS
+
+# %admin        ALL=(root) NOPASSWD LOCATE, NETWORKING, SOFTWARE, SERVICES, LOCATE, STORAGE, DELEGATING, PROCESSES, DRIVERS 
+## %sys          ALL = NETWORKING, SOFTWARE, SERVICES, STORAGE, DELEGATING, PROCESSES, LOCATE, DRIVERS
+# %users        ALL=/sbin/mount /mnt/cdrom, /sbin/umount /mnt/cdrom
+# %users        localhost=/sbin/shutdown -h now
+
+
+
+####################################################################################
+#######################			Include sudoers.d		    ########################
+####################################################################################
+#includedir /etc/sudoers.d
+
+
+####################################################################################
+####################			Defaults specification		########################
+####################################################################################
+# Disable "ssh hostname sudo <cmd>", because it will show the password in clear. 
+#         You have to run "ssh -t hostname sudo <cmd>".
+Defaults    requiretty
+Defaults   !visiblepw
+Defaults    always_set_home
+Defaults    env_reset				#restreindre les variables d'nevironnement des utilisateur
+Defaults	editor=/usr/bin/vim, !env_editor	#editor sudoer par defaut
+Defaults    env_keep =  "COLORS DISPLAY HOSTNAME HISTSIZE INPUTRC KDEDIR LS_COLORS"
+Defaults    env_keep += "MAIL PS1 PS2 QTDIR USERNAME LANG LC_ADDRESS LC_CTYPE"
+Defaults    env_keep += "LC_COLLATE LC_IDENTIFICATION LC_MEASUREMENT LC_MESSAGES"
+Defaults    env_keep += "LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE"
+Defaults    env_keep += "LC_TIME LC_ALL LANGUAGE LINGUAS _XKB_CHARSET XAUTHORITY"
+#Defaults   env_keep += "HOME"
+Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin
+#Defaults:Phobos = !authenticate	#desactiver la demande de mot de passe pour les users
+defaults mailto=dlevray@gmail.com
+defaults timestamp_timeout = 20 	#temps de grâce avant que la saisie du mot de passe soit de nouveau demandée
+defaults pwfeedback					#afficher des astérisques lors de la saisie du mot de pass
+defaults badpass_message="Mauvais password" #hanger le message d'erreur lorsqu'un utilisateur entre un mauvais mot de passe
+defaults lecture = always			# Afficher le message SUDO à la connexion
+
+
+
+
+
+
+
+
+
+

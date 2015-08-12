@@ -1,0 +1,25 @@
+{
+  "name": "phobos-sudo",
+  "version": "0.1.0",
+  "author": "david levray",
+  "summary": "module for install/Config SUDO",
+  "license": "",
+  "source": "https://github.com/dl-puppet/phobos-sudo.git",
+  "project_page": "https://github.com/dl-puppet/phobos-sudo",
+  "issues_url": "https://github.com/dl-puppet/phobos-sudo/issues",
+  "operatingsystem_support": [
+  
+  ],
+  "requirements": [
+  
+  ],
+  "tags": [
+    "/etc/sudoers",
+    "sudo",
+    "/etc/sudoers.d",
+    "/etc/sudo.conf"
+  ],
+  "dependencies": [
+  
+  ]
+}

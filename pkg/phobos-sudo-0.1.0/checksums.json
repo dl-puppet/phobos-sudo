@@ -1,0 +1,13 @@
+{
+  "README.markdown": "c0b2a920cfdaca084df644118380d234",
+  "Rakefile": "f37e6131fe7de9a49b09d31596f5fbf1",
+  "manifests/config.pp": "4304fd757850d8cef82e2d5f4e9885fe",
+  "manifests/init.pp": "a92de91432a626d17a0fe1bdd2ee1400",
+  "manifests/install.pp": "37ab179125aea6d2d371575dd7d4a2dc",
+  "manifests/params.pp": "df884133e329da667cedc20077c7468d",
+  "metadata.json": "08f21007aacf58ea463ebe3071784a8b",
+  "spec/spec.opts": "a600ded995d948e393fbe2320ba8e51c",
+  "spec/spec_helper.rb": "3ea886dd135e120afa31e0aab12e85b0",
+  "templates/sudo.conf.erb": "5d796b9d28e62cecda9df8ffbfb2f962",
+  "templates/sudoers.erb": "8d3d9dfcb4cffc4e6d9e4a2924e94fe4"
+}
